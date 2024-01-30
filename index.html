@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heart Image Selector</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 50px;
+      background-color: black;
+      color: white;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #heartSelector {
+      margin-top: 10%;
+      margin-bottom: 5%;
+    }
+
+    #heartImage {
+      max-width: 250px;
+      height: auto;
+      margin-top: 20px;
+    }
+
+    #alphabetInput {
+        margin-left: auto;
+        margin-right: auto;
+      margin-top: 10px;
+      padding: 7px;
+      display: none; /* Initially hide the input box */
+font-size: 20px;
+      width: 300px;
+    text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div>
+      <select id="heartSelector" onchange="changeImage()">
+        <option value="heart1">144p</option>
+        <option value="heart2">240p</option>
+        <option value="heart3">360p</option>
+        <option value="heart4">720p</option>
+        <option value="heart5">1080p</option>
+      </select>
+      <div>
+        <img id="heartImage" src="heart1.png" alt="Heart Image">
+      </div>
+      <input type="text" id="alphabetInput" placeholder="Enter two alphabets to see 1080p" onchange="checkInput()">
+    </div>
+  </div>
+
+  <script>
+    function changeImage() {
+      var selector = document.getElementById("heartSelector");
+      var image = document.getElementById("heartImage");
+      var alphabetInput = document.getElementById("alphabetInput");
+
+      // Get the selected value from the dropdown
+      var selectedValue = selector.options[selector.selectedIndex].value;
+
+      // Check if the selected value is "heart5"
+      if (selectedValue === "heart5") {
+        // Show the input box only for "1080p"
+        alphabetInput.style.display = "block";
+      } else {
+        // Hide the input box for other options
+        alphabetInput.style.display = "none";
+        // For other options, change the image based on the selected value
+        image.src = selectedValue + ".png";
+      }
+    }
+
+    function checkInput() {
+      var selector = document.getElementById("heartSelector");
+      var image = document.getElementById("heartImage");
+      var alphabetInput = document.getElementById("alphabetInput");
+
+      // Get the selected value from the dropdown
+      var selectedValue = selector.options[selector.selectedIndex].value;
+
+      // Check if the selected value is "heart5"
+      if (selectedValue === "heart5") {
+        // Show the input box only for "1080p"
+        alphabetInput.style.display = "block";
+
+        // Check if the alphabet input is exactly two alphabets
+        var inputText = alphabetInput.value.trim().toLowerCase();
+        if (/^[a-z]{2}$/.test(inputText) && inputText === "ht"  ) {
+          image.src = "heart5.png";
+        } else {
+          // Display a message for incorrect input
+          alert("You are not capable person! plz try again to valid alphabates ");
+          // Reset the dropdown and input to the default state
+          selector.selectedIndex = 0;
+          image.src = "heart1.png";
+          alphabetInput.style.display = "none";
+        }
+      }
+    }
+  </script>
+
+</body>
+</html>
